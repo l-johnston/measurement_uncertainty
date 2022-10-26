@@ -93,8 +93,8 @@ def phi_inv(y, pars=None):
 # Evaluate measurement uncertainty, VII B 3
 u_prt = 0.0015  # °C, PRT standard uncertainty
 u_cable = 0.01  # °C, cable standard uncertainty
-δ_std = np.std(residual(fit_result.params, tau, t), ddof=1)  # 0.0103 °C corrected sample std_dev
-# δ_std = 0.012  # °C, reported value in paper
+# estimate of standard deviation of 3rd order polynomial has p + 1 = 4 degrees of freedom
+δ_std = np.std(residual(fit_result.params, tau, t), ddof=4)  # 0.012 °C
 γ = np.sqrt(δ_std**2 + u_cable**2)  # °C
 m = 100
 Θ = np.linspace(t.min(), t.max(), m)
